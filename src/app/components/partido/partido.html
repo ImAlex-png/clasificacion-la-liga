@@ -1,0 +1,35 @@
+<h2>Registrar resultado de partido</h2>
+
+<form>
+  <div>
+    <label>Equipo local:
+      <select [(ngModel)]="local" name="local">
+        <option value="">-- Selecciona equipo --</option>
+        <option *ngFor="let nombre of nombresEquipos" [value]="nombre">{{ nombre }}</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <label>Equipo visitante:
+      <select [(ngModel)]="visitante" name="visitante">
+        <option value="">-- Selecciona equipo --</option>
+        <option *ngFor="let nombre of nombresEquipos" [value]="nombre">{{ nombre }}</option>
+      </select>
+    </label>
+  </div>
+
+  <div>
+    <label>Goles local:
+      <input type="number" min="0" [(ngModel)]="golesLocal" name="golesLocal">
+    </label>
+  </div>
+
+  <div>
+    <label>Goles visitante:
+      <input type="number" min="0" [(ngModel)]="golesVisitante" name="golesVisitante">
+    </label>
+  </div>
+
+  <button type="button" (click)="registrarResultado()">Registrar resultado</button>
+</form>

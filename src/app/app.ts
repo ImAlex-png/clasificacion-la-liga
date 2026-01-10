@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Clasificacion } from './components/clasificacion/clasificacion';
+import { Partido } from './components/partido/partido';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Clasificacion, Partido],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

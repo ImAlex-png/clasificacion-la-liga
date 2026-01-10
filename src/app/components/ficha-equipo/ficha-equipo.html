@@ -1,0 +1,19 @@
+<h2>Ficha del equipo</h2>
+
+<div *ngIf="equipo">
+  <p><strong>Nombre:</strong> {{ equipo.nombre }}</p>
+  <p><strong>Puntos:</strong> {{ equipo.puntos }}</p>
+  <p><strong>Partidos jugados:</strong> {{ equipo.pj }}</p>
+  <p><strong>Ganados:</strong> {{ equipo.pg }}</p>
+  <p><strong>Empatados:</strong> {{ equipo.pe }}</p>
+  <p><strong>Perdidos:</strong> {{ equipo.pp }}</p>
+  <p><strong>Goles a favor:</strong> {{ equipo.gf }}</p>
+  <p><strong>Goles en contra:</strong> {{ equipo.gc }}</p>
+  <p><strong>Diferencia de goles:</strong> {{ equipo.dg }}</p>
+</div>
+
+<div *ngIf="!equipo">
+  Equipo no encontrado
+</div>
+
+<a routerLink="/">Volver al inicio</a>

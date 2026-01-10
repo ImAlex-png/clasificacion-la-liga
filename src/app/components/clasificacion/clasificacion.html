@@ -1,0 +1,35 @@
+<h2>Clasificación de la Liga</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Pos</th>
+            <th>Equipo</th>
+            <th>Pts</th>
+            <th>PJ</th>
+            <th>PG</th>
+            <th>PE</th>
+            <th>PP</th>
+            <th>GF</th>
+            <th>GC</th>
+            <th>Dif</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let equipo of equipos; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+                <a [routerLink]="['/ficha', equipo.nombre]">{{ equipo.nombre }}</a> <!-- ← ESTO ES EL ENLACE -->
+            </td>
+            <td>{{ equipo.puntos }}</td>
+            <td>{{ equipo.pj }}</td>
+            <td>{{ equipo.pg }}</td>
+            <td>{{ equipo.pe }}</td>
+            <td>{{ equipo.pp }}</td>
+            <td>{{ equipo.gf }}</td>
+            <td>{{ equipo.gc }}</td>
+            <td>{{ equipo.dg }}</td>
+        </tr>
+</table>
+
+<button (click)="cargarClasificacion()">Actualizar tabla</button>
