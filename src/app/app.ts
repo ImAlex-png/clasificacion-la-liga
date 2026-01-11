@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { Clasificacion } from './components/clasificacion/clasificacion';
-import { Partido } from './components/partido/partido';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Clasificacion, Partido],
+  imports: [RouterModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

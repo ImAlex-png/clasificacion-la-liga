@@ -1,26 +1,90 @@
+/* ficha-equipo.component.css - Estilo elegante y académico */
+
+h2 {
+  text-align: center;
+  color: #0d47a1; /* Azul institucional del documento */
+  margin: 40px 0 30px;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 div {
   max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background: #f9f9f9;
+  margin: 0 auto 40px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
 p {
-  margin: 10px 0;
+  margin: 16px 0;
   font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
 }
 
-a {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
+strong {
   color: #0d47a1;
-  text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  min-width: 140px;
+  display: inline-block;
 }
 
-a:hover {
-  text-decoration: underline;
+/* Mensaje de error */
+div:nth-child(2) {
+  text-align: center;
+  color: #c62828;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Botón volver */
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 40px;
+  background-color: #0d47a1;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.2);
+}
+
+button:hover {
+  background-color: #1565c0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  div {
+    margin: 20px;
+    padding: 25px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  p {
+    font-size: 1rem;
+  }
+  
+  button {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
 }

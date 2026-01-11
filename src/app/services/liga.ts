@@ -8,6 +8,7 @@ import { Equipo } from '../models/equipo';
 export class Liga {
 
   private equipos: Equipo[] = [];
+  private puntosHistory: Map<string, number[]> = new Map();
 
   constructor() {
     this.cargarEquiposIniciales();
@@ -30,18 +31,21 @@ export class Liga {
       ["Juventus", 11, 12, 3, 2, 7, 9, 16]
     ];
 
-    this.equipos = datosIniciales.map(datos =>
-      new Equipo(
+    this.equipos = datosIniciales.map(datos => {
+      const equipo = new Equipo(
         datos[0] as string,     // nombre
         datos[1] as number,     // puntos
         datos[2] as number,     // PJ
-        datos[3] as number,     // PG
-        datos[4] as number,     // PE
-        datos[5] as number,     // PP
-        datos[6] as number,     // GF
-        datos[7] as number      // GC
-      )
-    );
+        datos[3] as number,     // PE
+        datos[4] as number,     // PP
+        datos[5] as number,     // GF
+        datos[6] as number,     // GC
+        datos[7] as number      // DG
+      );
+    
+      this.puntosHistory.set(equipo.nombre, [equipo.puntos]);
+      return equipo;
+    });
   }
 
   obtenerClasificacion(): Equipo[] {
@@ -71,7 +75,7 @@ export class Liga {
     local.registrarResultado(golesLocal, golesVisitante);
     visitante.registrarResultado(golesVisitante, golesLocal);
 
-    // ← SOLUCIÓN: ORDENAMOS EL ARRAY INTERNO AUTOMÁTICAMENTE
+   
     this.equipos.sort((a: Equipo, b: Equipo) => {
       if (a.puntos !== b.puntos) {
         return b.puntos - a.puntos;
@@ -84,6 +88,9 @@ export class Liga {
       return b.gf - a.gf;
     });
 
+    this.puntosHistory.get(local.nombre)?.push(local.puntos);
+    this.puntosHistory.get(visitante.nombre)?.push(visitante.puntos);
+
     return true;
   }
 
@@ -93,6 +100,10 @@ export class Liga {
 
   obtenerNombresEquipos(): string[] {
     return this.equipos.map(e => e.nombre);
+  }
+
+  obtenerHistorialPuntos(nombre: string): number[] {
+    return this.puntosHistory.get(nombre) || [];
   }
 }
 

@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Equipo } from '../../models/equipo';
 import { Liga } from '../../services/liga';
 import { RouterLink } from '@angular/router';
+import { Partido } from '../partido/partido';
 
 @Component({
   selector: 'app-clasificacion',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Partido],
   templateUrl: './clasificacion.html',
   styleUrl: './clasificacion.css',
 })

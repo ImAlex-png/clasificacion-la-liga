@@ -1,5 +1,7 @@
 <h2>Clasificación de la Liga</h2>
 
+<app-partido></app-partido>
+
 <table>
     <thead>
         <tr>
@@ -19,7 +21,10 @@
         <tr *ngFor="let equipo of equipos; let i = index">
             <td>{{ i + 1 }}</td>
             <td>
-                <a [routerLink]="['/ficha', equipo.nombre]">{{ equipo.nombre }}</a> <!-- ← ESTO ES EL ENLACE -->
+                <a [routerLink]="['/ficha', equipo.nombre]"
+                    style="text-decoration: none; color: #0d47a1; font-weight: 500;">
+                    {{ equipo.nombre }}
+                </a>
             </td>
             <td>{{ equipo.puntos }}</td>
             <td>{{ equipo.pj }}</td>

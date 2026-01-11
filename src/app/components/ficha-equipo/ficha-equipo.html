@@ -1,6 +1,6 @@
 <h2>Ficha del equipo</h2>
 
-<div *ngIf="equipo">
+<div *ngIf="equipo" style="max-width: 500px; margin: 40px auto; padding: 25px; background: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   <p><strong>Nombre:</strong> {{ equipo.nombre }}</p>
   <p><strong>Puntos:</strong> {{ equipo.puntos }}</p>
   <p><strong>Partidos jugados:</strong> {{ equipo.pj }}</p>
@@ -12,8 +12,20 @@
   <p><strong>Diferencia de goles:</strong> {{ equipo.dg }}</p>
 </div>
 
-<div *ngIf="!equipo">
+<div *ngIf="!equipo" style="text-align: center; color: #c62828; margin: 40px;">
   Equipo no encontrado
 </div>
 
-<a routerLink="/">Volver al inicio</a>
+
+<h3>Evolución de puntos</h3>
+<canvas baseChart
+  [data]="lineChartData"
+  [options]="lineChartOptions"
+  [type]="lineChartType"
+  style="width: 100%; height: 300px;">
+</canvas>
+
+
+<button routerLink="/" style="display: block; margin: 30px auto; padding: 12px 30px; background: #0d47a1; color: white; border: none; border-radius: 6px; cursor: pointer;">
+  Volver a la clasificación
+</button>
