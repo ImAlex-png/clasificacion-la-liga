@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Equipo } from '../models/equipo';
-
 @Injectable({
   providedIn: 'root',
 })
+
+// Servicio que gestiona la lógica de la liga de fútbol
 export class Liga {
 
   private equipos: Equipo[] = [];
+
+  // Historial de puntos por equipo
   private puntosHistory: Map<string, number[]> = new Map();
 
   constructor() {
+
+    // Inicializa datos al instanciar
     this.cargarEquiposIniciales();
   }
 
-  /**
-   * Carga los 10 equipos con las estadísticas iniciales que tenías en JavaScript
-   */
+
+  // Carga los 10 equipos con las estadísticas iniciales que tenías en JavaScript
   private cargarEquiposIniciales(): void {
     const datosIniciales = [
       ["Real Madrid", 31, 12, 10, 1, 1, 28, 10],
@@ -42,66 +45,77 @@ export class Liga {
         datos[6] as number,     // GC
         datos[7] as number      // DG
       );
-    
+
       this.puntosHistory.set(equipo.nombre, [equipo.puntos]);
       return equipo;
     });
   }
 
   obtenerClasificacion(): Equipo[] {
-    return [...this.equipos];  // Devuelve copia (ya ordenada desde registrarResultado)
+    // Devuelve copia (ya ordenada desde registrarResultado)
+    return [...this.equipos];
   }
 
+  // Registra resultado de partido y actualiza estadísticas
   registrarResultado(
     nombreLocal: string,
     nombreVisitante: string,
     golesLocal: number,
     golesVisitante: number
   ): boolean {
+    // Valida equipos diferentes
     if (nombreLocal === nombreVisitante) {
       console.warn("Error: el equipo local y visitante no pueden ser el mismo");
       return false;
     }
 
+    // Busca equipo local
     const local = this.equipos.find(e => e.nombre === nombreLocal);
+
+    // Busca equipo visitante
     const visitante = this.equipos.find(e => e.nombre === nombreVisitante);
 
+    // Valida existencia de equipos
     if (!local || !visitante) {
       console.warn("Error: uno o ambos equipos no existen");
       return false;
     }
 
-    // Actualizamos estadísticas
+    // Actualiza estadísticas de ambos equipos
     local.registrarResultado(golesLocal, golesVisitante);
     visitante.registrarResultado(golesVisitante, golesLocal);
 
-   
+    // Reordena clasificación por criterios de desempate
     this.equipos.sort((a: Equipo, b: Equipo) => {
       if (a.puntos !== b.puntos) {
-        return b.puntos - a.puntos;
+        return b.puntos - a.puntos; // Más puntos primero
       }
       const difA = a.dg;
       const difB = b.dg;
       if (difA !== difB) {
-        return difB - difA;
+        return difB - difA; // Mejor diferencia de goles
       }
-      return b.gf - a.gf;
+      return b.gf - a.gf; // Más goles a favor
     });
 
+    // Actualiza historial de puntos para ambos equipos
     this.puntosHistory.get(local.nombre)?.push(local.puntos);
     this.puntosHistory.get(visitante.nombre)?.push(visitante.puntos);
 
     return true;
   }
 
+  // Busca equipo por nombre
   obtenerEquipoPorNombre(nombre: string): Equipo | undefined {
     return this.equipos.find(e => e.nombre === nombre);
   }
 
+  // Retorna lista de nombres de equipos
   obtenerNombresEquipos(): string[] {
     return this.equipos.map(e => e.nombre);
   }
 
+  // Retorna historial de puntos de un equipo
   obtenerHistorialPuntos(nombre: string): number[] {
     return this.puntosHistory.get(nombre) || [];
   }

@@ -1,10 +1,11 @@
-import { Routes } from '@angular/router';
-import { Clasificacion } from './components/clasificacion/clasificacion';
-import { Partido } from './components/partido/partido';
-import { FichaEquipo } from './components/ficha-equipo/ficha-equipo';
+import { Routes } from '@angular/router'; 
+import { Clasificacion } from './components/clasificacion/clasificacion'; 
+import { Partido } from './components/partido/partido'; 
+import { FichaEquipo } from './components/ficha-equipo/ficha-equipo'; 
 
+// Definición de rutas de la aplicación
 export const routes: Routes = [
-  { path: '', component: Clasificacion },             // Ruta principal: tabla (pero ya está fija en app.html)
-  { path: 'ficha/:nombre', component: FichaEquipo },  // Ruta para la ficha (se carga en router-outlet)
-  { path: '**', redirectTo: '' }                      // Cualquier otra → principal
+  { path: '', component: Clasificacion },             // Ruta raíz: muestra tabla de clasificación
+  { path: 'ficha/:nombre', component: FichaEquipo },  // Ruta con parámetro: ficha del equipo
+  { path: '**', redirectTo: '' }                      // Ruta comodín: redirige a raíz
 ];
